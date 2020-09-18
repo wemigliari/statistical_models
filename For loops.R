@@ -49,7 +49,7 @@ vec1 <- numeric(5)
 vec1  
 
 for (i in 1:5){
-  vec[i] <- i^2
+  vec1[i] <- i^2
 }
 vec1
 
@@ -74,9 +74,16 @@ for (i in 1:4){
 vec3
 
 ######## If and if else
-#Let's suppose our variable "t" is the four temperatures of a week. 
+#Let's suppose our variable "t" is the temperatures for different days. 
 
-t <- c(-5,-3,-1,2,3,4,5,6,7,8,9,12,13,19,-1)
+t <- c(-5,-3,-1,2,3,4,5,6,7,8,9,40,13,19,-1)
+x <- c(-10:110)
+
+y <- length(-20:50)
+
+#> Warning message:
+# In if (t > 0) { :
+# the condition has length > 1 and only the first element will be used
 
 if(t>0){
   print("Warm")
@@ -92,11 +99,31 @@ if(t>0){
 
 #So...
 
-for (t in c(-5,-3,-1,2,3,4,5,6,7,8,9,12,13,19,-1))if(t>0){
+for (t in t)if(t>0){
   print("Warm")
 }else{
   print("Cold")
 }
-  
+
+
+tempo <- function(x){for (x in x)if(x>0){
+  print("Warm")
+}else{
+  print("Cold")}
+}
+
+desvio(t)
+media(t)
+tempo(x)
+
+
+test <- ifelse (x <= 0, "freezing",
+ifelse (x <= 10, "cold",
+ifelse (x <= 20, "warm",
+ifelse (x >= 30, "hot"))))
+
+test()
+
+
 
 
