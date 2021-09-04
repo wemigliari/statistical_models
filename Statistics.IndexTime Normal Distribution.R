@@ -1,4 +1,4 @@
-#Multiple Normal Distribution
+# Normal Distribution
 library(readxl)
 library(ggplot2)
 summary(IndexTiempo)
