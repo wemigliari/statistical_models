@@ -20,5 +20,6 @@ mean(MinutosCTrab)
 sd(MinutosCTrab)
 
 par(mfrow = c(1,1), family= "Arial", cex = 0.7, oma = c(4, 1, 1, 4))
-plot(function(MinutosCTrab)dnorm(MinutosCTrab,mean=44.7,sd=25.49),1,95,
+plot(function(MinutosCTrab)dnorm(MinutosCTrab,mean=61.45,sd=29.69),1,125,
+     col = "steelblue", lty = 3,
      xlab="Tempo", ylab= "Distribuição de Probabilidade")
