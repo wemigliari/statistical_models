@@ -4,8 +4,11 @@ library(dplyr)
 perfil <- read_xlsx("/Users/wemigliari/Documents/R/tabelas/pop_rua_bh.xlsx",
                     sheet = "Perfil")
 
+
 simple.fit = lm(perfil$Total~perfil$Ate_seis_meses_tempo_rua, data=perfil)
 summary(simple.fit)
+
+
 
 multi.fit = lm(perfil$Total~perfil$Ate_seis_meses_tempo_rua+
                  perfil$Entre_seis_meses_e_um_ano_tempo_rua+
@@ -16,6 +19,37 @@ multi.fit = lm(perfil$Total~perfil$Ate_seis_meses_tempo_rua+
 
 summary(multi.fit)
 
+residuos <- resid(multi.fit)
+
+par(mfrow = c(1,1), family= "Arial", cex = 0.6, oma = c(1, 1, 1, 1))
+plot(perfil$Total, residuos, 
+ ylab="Resíduos", xlab="Totais de Moradores da Série Histórica Analisada Set 2020/Jun 2021", 
+main="Regressão Multilinear Totais e Tempo de Rua") 
+abline(0, 0)  
+
+#### Excluindo a coluna repetida na regressao multilinear
+
+perfil2 <- data.frame(perfil)
+perfil2 <- perfil[-c(7),]
+
+multi.fit2 = lm(perfil2$Total~perfil2$Ate_seis_meses_tempo_rua+
+                       perfil2$Entre_seis_meses_e_um_ano_tempo_rua+
+                       perfil2$Entre_um_e_dois_anos_tempo_rua+
+                       perfil2$Entre_dois_e_cinco_anos_tempo_rua+
+                       perfil2$Entre_cinco_e_dez_anos_tempo_rua+
+                       perfil2$Mais_de_dez_anos_tempo_rua, data=perfil2)
+
+summary(multi.fit2)
+
+residuos2 <- resid(multi.fit2)
+
+par(mfrow = c(1,1), family= "Arial", cex = 0.6, oma = c(1, 1, 1, 1))
+plot(perfil2$Total, residuos2, 
+     ylab="Resíduos", xlab="Totais de Moradores da Série Histórica Analisada Set 2020/Jun 2021", 
+     main="Regressão Multilinear Totais e Tempo de Rua (Dados Redundantes Excluídos)") 
+abline(0, 0)  
+
+####
 
 library(broom)
 test <- tidy(summary(multi.fit))
